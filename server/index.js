@@ -34,14 +34,6 @@ app.post('/api/insert', (req, res)=> {
   })
 })
 
-/* app.get('/', (req, res) => {
-  const sqlInsert = "INSERT INTO Courses (courseCode, courseName) VALUES ('CPSC 213', 'Introduction to Computer Systems');"
-  db.query(sqlInsert, (err, result) => {
-    res.send('HELLO WORLD!')
-  })
-})
- */
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+}) 
