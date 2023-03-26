@@ -30,7 +30,10 @@ export default function CourseList() {
   
     return (
         <div style={{ width: '100%', margin: '0 auto', textAlign: 'left' }}>
-        {courseList.map((course, index) => (
+        {courseList.length === 0 ? (
+                <p>There are no added courses!</p>
+            ) : (
+        courseList.map((course, index) => (
           <Accordion key={index} >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -46,7 +49,8 @@ export default function CourseList() {
               </Typography>
             </AccordionDetails>
           </Accordion>
-        ))}
+        ))
+      )}
       </div>
     );
 }
