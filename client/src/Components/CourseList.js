@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios';
+import api from '../axios.config.js';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -11,7 +11,7 @@ export default function CourseList() {
     const [courseList, setCourseList] = useState([]);
   
     useEffect(() => {
-      Axios.get('http://localhost:4000/api/courses').then((response) => {
+      api.get('/api/courses').then((response) => {
         setCourseList(response.data);
       });
     }, []);

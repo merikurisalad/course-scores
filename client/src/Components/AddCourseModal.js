@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import api from '../axios.config.js';
 import "./AddCourseModal.css";
-import Axios from 'axios';
 import { Button, TextField, IconButton, Modal } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -10,7 +10,7 @@ const AddCourseModal = ({ showModal, hideModal }) => {
   const [components, setComponents] = useState([{ name: '', weight: 0 }]);
   
   const submitCourse = () => {
-    Axios.post('http://localhost:4000/api/insert', {
+    api.post('/api/courses', {
       courseCode: courseCode,
       courseName: courseName,
       components: components
