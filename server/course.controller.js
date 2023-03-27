@@ -61,3 +61,15 @@ export const insertCourse = (req, res) => {
       }
     });
 };
+
+export const deleteCourse = async (req, res) => {
+  const sqlDeleteCourse = 'DELETE FROM Courses WHERE idCourse = ?';
+  try {
+    const id = req.params.id;
+    const result = await db.promise().query(sqlDeleteCourse, [id]);
+    res.status(200).send(`Course with ID ${id} deleted.`);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error deleting course.');
+  }
+}

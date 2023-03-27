@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import api from '../axios.config.js';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import {
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Typography
+} from '@mui/material'
+// import Accordion from '@mui/material/Accordion';
+// import AccordionSummary from '@mui/material/AccordionSummary';
+// import AccordionDetails from '@mui/material/AccordionDetails';
+// import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
@@ -27,6 +35,12 @@ export default function CourseList() {
         </ul>
       );
     };
+
+    const handleDelete = (id) => {
+      api.delete(`api/courses/${id}`).then(() => {
+        setCourseList(courseList.filter((course) => course.id !== id));
+      });
+    };
   
     return (
         <div style={{ width: '100%', margin: '0 auto', textAlign: 'left' }}>
@@ -48,6 +62,18 @@ export default function CourseList() {
                 {renderComponents(course.components)}
               </Typography>
             </AccordionDetails>
+
+            <AccordionActions>
+            <Button
+              variant="contained"
+              onClick={() => 
+                handleDelete(course.id).then(console.log(course.id))
+              }
+            >
+              Delete
+            </Button>
+          </AccordionActions>
+
           </Accordion>
         ))
       )}
