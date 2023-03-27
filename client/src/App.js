@@ -3,6 +3,7 @@ import './App.css';
 import AddCourseModal from "./Components/AddCourseModal"
 import CourseList from "./Components/CourseList"
 import Button from '@mui/material/Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster />
       <div className="header">
         <h1>Course Scores App</h1>
         <Button variant="contained" onClick={() => setShowModal(true)}>

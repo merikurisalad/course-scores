@@ -3,6 +3,7 @@ import api from '../axios.config.js';
 import "./AddCourseModal.css";
 import { Button, TextField, IconButton, Modal } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddCourseModal = ({ showModal, hideModal }) => {
   const [courseCode, setCourseCode] = useState('')
@@ -15,7 +16,10 @@ const AddCourseModal = ({ showModal, hideModal }) => {
       courseName: courseName,
       components: components
     }).then(() => {
-      alert("Successful insert")
+      const displaySuccessNotification = () => {
+        toast.success('Successfully added!')
+      };
+      displaySuccessNotification();
     })
   }
 

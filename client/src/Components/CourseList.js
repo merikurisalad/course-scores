@@ -13,6 +13,7 @@ import {
 // import AccordionDetails from '@mui/material/AccordionDetails';
 // import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ConfirmDelete from './ConfirmDelete';
 
 
 export default function CourseList() {
@@ -64,14 +65,9 @@ export default function CourseList() {
             </AccordionDetails>
 
             <AccordionActions>
-            <Button
-              variant="contained"
-              onClick={() => 
-                handleDelete(course.id).then(console.log(course.id))
-              }
-            >
-              Delete
-            </Button>
+              <ConfirmDelete onConfirm={() => handleDelete(course.id)}>
+                Delete
+              </ConfirmDelete>
           </AccordionActions>
 
           </Accordion>
