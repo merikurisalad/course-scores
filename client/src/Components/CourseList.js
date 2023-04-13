@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import api from '../axios.config.js';
 import {
-  Accordion,
-  AccordionActions,
-  AccordionDetails,
-  AccordionSummary,
-  Typography
+  Accordion, AccordionActions, AccordionDetails, AccordionSummary, Typography,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import ConfirmDelete from './ConfirmDelete';
 
 
@@ -35,17 +25,19 @@ export default function CourseList() {
       });
     };
 
-    const computeWeightedGrade = (components) => {
+    const computeWeightedGrade = (components, componentGrades) => {
       let weightedGrade = 0;
+      let weightedGradesByComponent = {};
       components.forEach((component) => {
         const grade = componentGrades[component.id] || 0;
-        weightedGrade += (component.componentWeight / component.maxScore) * grade;
+        const componentWeightedGrade = (component.componentWeight / component.maxScore) * grade;
+        weightedGrade += componentWeightedGrade;
+        weightedGradesByComponent[component.id] = componentWeightedGrade.toFixed(2);
       });
-      return (weightedGrade).toFixed(2);
+      return { totalWeightedGrade: weightedGrade.toFixed(2), weightedGradesByComponent };
     };
     
     const renderComponents = (components) => {
-      console.log(components)
       return (
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="components table">
@@ -80,9 +72,13 @@ export default function CourseList() {
                   }
                 />
               </TableCell>
-              <TableCell align="right">{computeWeightedGrade([component])}</TableCell>
+              <TableCell align="right">{computeWeightedGrade([component], componentGrades).weightedGradesByComponent[component.id]}</TableCell> {/* Display weighted grade for each component */}
             </TableRow>
           ))}
+          <TableRow>
+            <TableCell align="right" colSpan={4}>Total</TableCell>
+            <TableCell align="right">{computeWeightedGrade(components, componentGrades).totalWeightedGrade}</TableCell> {/* Display total weighted grade */}
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
