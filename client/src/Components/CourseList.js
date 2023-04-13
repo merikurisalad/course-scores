@@ -5,37 +5,90 @@ import {
   AccordionActions,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Typography
 } from '@mui/material'
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
-// import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import ConfirmDelete from './ConfirmDelete';
 
 
 export default function CourseList() {
     const [courseList, setCourseList] = useState([]);
+    const [componentGrades, setComponentGrades] = useState({});
   
     useEffect(() => {
       api.get('/api/courses').then((response) => {
         setCourseList(response.data);
       });
     }, []);
-  
-    const renderComponents = (components) => {
-      return (
-        <ul>
-          {components.map((component) => (
-            <li key={component.id}>
-              {component.componentName} ({component.componentWeight}%)
-            </li>
-          ))}
-        </ul>
-      );
+
+    const handleComponentGradeChange = (componentId, grade) => {
+      setComponentGrades({
+        ...componentGrades,
+        [componentId]: grade,
+      });
     };
+
+    const computeWeightedGrade = (components) => {
+      let weightedGrade = 0;
+      components.forEach((component) => {
+        const grade = componentGrades[component.id] || 0;
+        weightedGrade += (component.componentWeight / component.maxScore) * grade;
+      });
+      return (weightedGrade).toFixed(2);
+    };
+    
+    const renderComponents = (components) => {
+      console.log(components)
+      return (
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="components table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Component</TableCell>
+            <TableCell align="right">Weight</TableCell>
+            <TableCell align="right">Max Score</TableCell>
+            <TableCell align="right">User Inputted Grade</TableCell>
+            <TableCell align="right">Weighted Grade</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {components.map((component) => (
+            <TableRow key={component.id}>
+              <TableCell component="th" scope="row">
+                {component.componentName}
+              </TableCell>
+              <TableCell align="right">{component.componentWeight}%</TableCell>
+              <TableCell align="right">{component.maxScore}</TableCell>
+              <TableCell align="right">
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={componentGrades[component.id] || ''}
+                  onChange={(event) =>
+                    handleComponentGradeChange(
+                      component.id,
+                      event.target.valueAsNumber
+                    )
+                  }
+                />
+              </TableCell>
+              <TableCell align="right">{computeWeightedGrade([component])}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
 
     const handleDelete = (id) => {
       api.delete(`api/courses/${id}`).then(() => {

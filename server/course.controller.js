@@ -2,7 +2,7 @@ import { db } from './db/index.js'
 
 export const getCourses = (req, res) => {
     const sqlSelect = `
-      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Components.idComponent AS componentId, Components.componentName, Components.componentWeight
+      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Components.idComponent AS componentId, Components.componentName, Components.componentWeight, Components.maxScore
       FROM Courses
       LEFT JOIN Components ON Courses.idCourse = Components.courseId
     `;
@@ -27,6 +27,7 @@ export const getCourses = (req, res) => {
               id: row.componentId,
               componentName: row.componentName,
               componentWeight: row.componentWeight,
+              maxScore: row.maxScore
             });
           }
         });
@@ -47,8 +48,8 @@ export const insertCourse = (req, res) => {
         res.status(500).send({ message: 'An error occurred while inserting course.' });
       } else {
         const courseId = result.insertId;
-        const sqlInsertComponents = 'INSERT INTO Components (componentName, componentWeight, courseID) VALUES ?';
-        const values = components.map((c) => [c.name, c.weight, courseId]);
+        const sqlInsertComponents = 'INSERT INTO Components (componentName, componentWeight, maxScore, courseID) VALUES ?';
+        const values = components.map((c) => [c.name, c.weight, c.max, courseId]);
         db.query(sqlInsertComponents, [values], (err, result) => {
           if (err) {
             console.log(err);

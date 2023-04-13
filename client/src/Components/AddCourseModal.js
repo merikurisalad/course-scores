@@ -3,12 +3,12 @@ import api from '../axios.config.js';
 import "./AddCourseModal.css";
 import { Button, TextField, IconButton, Modal } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AddCourseModal = ({ showModal, hideModal }) => {
   const [courseCode, setCourseCode] = useState('')
   const [courseName, setCourseName] = useState('')
-  const [components, setComponents] = useState([{ name: '', weight: 0 }]);
+  const [components, setComponents] = useState([{ name: '', weight: 0, max: 0 }]);
   
   const submitCourse = () => {
     api.post('/api/courses', {
@@ -69,11 +69,19 @@ const AddCourseModal = ({ showModal, hideModal }) => {
                       setComponents(newComponents);
                     }}
                   />
+
+                  <TextField
+                    id="outlined-basic" label="Component MaxScore" variant="outlined" onChange={(e) => {
+                      const newComponents = [...components];
+                      newComponents[index] = { ...component, max: e.target.value };
+                      setComponents(newComponents);
+                    }}
+                  />
                 </div>
               ))}
               </div>
               <Button variant="contained" onClick={() => {
-                const newComponents = [...components, { name: '', weight: 0 }];
+                const newComponents = [...components, { name: '', weight: 0, max: 0 }];
                 setComponents(newComponents);
                 }}
                 style={{float: 'left'}}
