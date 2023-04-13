@@ -39,9 +39,9 @@ export default function CourseList() {
       let weightedGrade = 0;
       components.forEach((component) => {
         const grade = componentGrades[component.id] || 0;
-        weightedGrade += (component.componentWeight / 100) * grade;
+        weightedGrade += (component.componentWeight / component.maxScore) * grade;
       });
-      return (weightedGrade * 100).toFixed(2);
+      return (weightedGrade).toFixed(2);
     };
     
     const renderComponents = (components) => {
@@ -80,7 +80,7 @@ export default function CourseList() {
                   }
                 />
               </TableCell>
-              <TableCell align="right">{computeWeightedGrade(components)}%</TableCell>
+              <TableCell align="right">{computeWeightedGrade([component])}</TableCell>
             </TableRow>
           ))}
         </TableBody>
