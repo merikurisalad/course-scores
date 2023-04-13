@@ -2,7 +2,7 @@ import { db } from './db/index.js'
 
 export const getCourses = (req, res) => {
     const sqlSelect = `
-      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Components.idComponent AS componentId, Components.componentName, Components.componentWeight
+      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Components.idComponent AS componentId, Components.componentName, Components.componentWeight, Components.maxScore
       FROM Courses
       LEFT JOIN Components ON Courses.idCourse = Components.courseId
     `;
@@ -27,6 +27,7 @@ export const getCourses = (req, res) => {
               id: row.componentId,
               componentName: row.componentName,
               componentWeight: row.componentWeight,
+              maxScore: row.maxScore
             });
           }
         });
