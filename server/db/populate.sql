@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS Courses;
 
 -- Create the courses table
 CREATE TABLE Courses (
-  idCourse INT PRIMARY KEY,
+  idCourse INT AUTO_INCREMENT PRIMARY KEY,
   courseCode VARCHAR(255),
   courseName VARCHAR(255)
 );
@@ -17,10 +17,10 @@ VALUES (1, 'CSE101', 'Introduction to Computer Science'),
 
 -- Create the components table with a foreign key to the courses table
 CREATE TABLE Components (
-  idComponent INT PRIMARY KEY,
+  idComponent INT AUTO_INCREMENT PRIMARY KEY,
   componentName VARCHAR(255),
   componentWeight DECIMAL(5,2),
-  maxScore DECIMAL(5,2),
+  maxScore INT,
   courseID INT,
   FOREIGN KEY (courseID) REFERENCES courses(idCourse)
 );

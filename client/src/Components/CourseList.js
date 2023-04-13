@@ -52,6 +52,7 @@ export default function CourseList() {
           <TableRow>
             <TableCell>Component</TableCell>
             <TableCell align="right">Weight</TableCell>
+            <TableCell align="right">Max Score</TableCell>
             <TableCell align="right">User Inputted Grade</TableCell>
             <TableCell align="right">Weighted Grade</TableCell>
           </TableRow>
@@ -63,6 +64,7 @@ export default function CourseList() {
                 {component.componentName}
               </TableCell>
               <TableCell align="right">{component.componentWeight}%</TableCell>
+              <TableCell align="right">{component.maxScore}</TableCell>
               <TableCell align="right">
                 <input
                   type="number"
