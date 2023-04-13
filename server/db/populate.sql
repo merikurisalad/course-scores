@@ -19,7 +19,7 @@ VALUES (1, 'CSE101', 'Introduction to Computer Science'),
 CREATE TABLE Components (
   idComponent INT AUTO_INCREMENT PRIMARY KEY,
   componentName VARCHAR(255),
-  componentWeight DECIMAL(5,2),
+  componentWeight INT,
   maxScore INT,
   courseID INT,
   FOREIGN KEY (courseID) REFERENCES courses(idCourse)
@@ -27,10 +27,10 @@ CREATE TABLE Components (
 
 -- Insert sample data into the components table with componentWeight values that amount to 100 for each courseID
 INSERT INTO Components (idComponent, componentName, componentWeight, maxScore, courseID)
-VALUES (1, 'Midterm Exam', 0.30, 100.00, 1),
-       (2, 'Final Exam', 0.40, 100.00, 1),
-       (3, 'Homework', 0.30, 100.00, 1),
-       (4, 'Quiz 1', 0.15, 50.00, 2),
-       (5, 'Quiz 2', 0.15, 50.00, 2),
-       (6, 'Essay', 0.40, 100.00, 3),
-       (7, 'Presentation', 0.60, 100.00, 3);
+VALUES (1, 'Midterm Exam', 30, 100, 1),
+       (2, 'Final Exam', 40, 100, 1),
+       (3, 'Homework', 30, 100, 1),
+       (4, 'Quiz 1', 15, 50, 2),
+       (5, 'Quiz 2', 15, 50, 2),
+       (6, 'Essay', 40, 100, 3),
+       (7, 'Presentation', 60, 100, 3);

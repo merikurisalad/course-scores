@@ -3,7 +3,7 @@ import api from '../axios.config.js';
 import "./AddCourseModal.css";
 import { Button, TextField, IconButton, Modal } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AddCourseModal = ({ showModal, hideModal }) => {
   const [courseCode, setCourseCode] = useState('')

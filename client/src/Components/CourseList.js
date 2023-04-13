@@ -64,10 +64,8 @@ export default function CourseList() {
               <TableCell component="th" scope="row">
                 {component.componentName}
               </TableCell>
-              <TableCell align="right">{component.componentWeight}</TableCell>
-              <TableCell align="right">
-        {component.maxScore ? component.maxScore : '-'} {/* Added check for maxScore */}
-      </TableCell>
+              <TableCell align="right">{component.componentWeight}%</TableCell>
+              <TableCell align="right">{component.maxScore}</TableCell>
               <TableCell align="right">
                 <input
                   type="number"
