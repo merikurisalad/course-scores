@@ -1,6 +1,6 @@
   .modalContainer {
-    width: 500px;
-    height: 500px;
+    width: 50%;
+    height: 60%;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -15,7 +15,22 @@
     margin: auto;
     transform: translate(0%, 0%);
   }
+
+  .modalContainer .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
   
+  .modalContainer .header .addCourse {
+    flex: 1; /* Use flex: 1 to make the typography take up remaining space on the left */
+  }
+  
+  .modalContainer .header .closeBtn {
+    flex: none; /* Use flex: none to prevent the close button from taking up remaining space */
+  }
+
   .closeBtn {
     display: flex;
     justify-content: flex-end;
