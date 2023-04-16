@@ -22,7 +22,7 @@ CREATE TABLE Components (
   componentWeight INT,
   maxScore INT,
   courseID INT,
-  FOREIGN KEY (courseID) REFERENCES courses(idCourse)
+  FOREIGN KEY (courseID) REFERENCES courses(idCourse) ON DELETE CASCADE
 );
 
 -- Insert sample data into the components table with componentWeight values that amount to 100 for each courseID

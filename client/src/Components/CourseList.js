@@ -25,51 +25,6 @@ export default function CourseList() {
       });
     };
 
-    const handleComponentFieldChange = (componentId, fieldName, fieldValue) => {
-      // Find the index of the component in the courseList
-      const componentIndex = courseList.findIndex((course) =>
-        course.components.some((component) => component.id === componentId)
-      );
-    
-      // Make a copy of the courseList and the component to update
-      const updatedCourseList = [...courseList];
-      const updatedComponent = { ...updatedCourseList[componentIndex].components.find((component) => component.id === componentId) };
-    
-      // Update the component field value
-      updatedComponent[fieldName] = fieldValue;
-    
-      // Update the component in the courseList
-      updatedCourseList[componentIndex].components = updatedCourseList[componentIndex].components.map((component) =>
-        component.id === componentId ? updatedComponent : component
-      );
-    
-      // Update the state with the updated courseList
-      setCourseList(updatedCourseList);
-    };
-
-    const handleComponentEditModeChange = (componentId, editMode) => {
-      // Find the index of the component in the courseList
-      const componentIndex = courseList.findIndex((course) =>
-        course.components.some((component) => component.id === componentId)
-      );
-    
-      // Make a copy of the courseList and the component to update
-      const updatedCourseList = [...courseList];
-      const updatedComponent = { ...updatedCourseList[componentIndex].components.find((component) => component.id === componentId) };
-    
-      // Update the edit mode
-      updatedComponent.editMode = editMode;
-    
-      // Update the component in the courseList
-      updatedCourseList[componentIndex].components = updatedCourseList[componentIndex].components.map((component) =>
-        component.id === componentId ? updatedComponent : component
-      );
-    
-      // Update the state with the updated courseList
-      setCourseList(updatedCourseList);
-    };
-    
-
     const computeWeightedGrade = (components, componentGrades) => {
       let weightedGrade = 0;
       let weightedGradesByComponent = {};
@@ -98,57 +53,11 @@ export default function CourseList() {
         <TableBody>
           {components.map((component) => (
             <TableRow key={component.id}>
-              <TableCell component="th" scope="row">
-              {component.editMode ? (
-                  <input
-                    type="string"
-                    value={component.componentName}
-                    onChange={(event) =>
-                      handleComponentFieldChange(component.id, 'componentName', event.target.value)
-                    }
-                    onBlur={() => handleComponentEditModeChange(component.id, false)}
-                  />
-                ) : (
-                  <span onClick={() => handleComponentEditModeChange(component.id, true)}>
-                    {component.componentName}
-                  </span>
-                )}
+              <TableCell component="th" scope="row">{component.componentName}
               </TableCell>
-              <TableCell align="right">
-                {component.editMode ? (
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={component.componentWeight}
-                    onChange={(event) =>
-                      handleComponentFieldChange(component.id, 'componentWeight', event.target.value)
-                    }
-                    onBlur={() => handleComponentEditModeChange(component.id, false)}
-                  />
-                ) : (
-                  <span onClick={() => handleComponentEditModeChange(component.id, true)}>
-                    {component.componentWeight}
-                  </span>
-                )}
+              <TableCell align="right">{component.componentWeight}
               </TableCell>
-              <TableCell align="right">
-                {component.editMode ? (
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={component.maxScore}
-                    onChange={(event) =>
-                      handleComponentFieldChange(component.id, 'maxScore', event.target.value)
-                    }
-                    onBlur={() => handleComponentEditModeChange(component.id, false)}
-                  />
-                ) : (
-                  <span onClick={() => handleComponentEditModeChange(component.id, true)}>
-                    {component.maxScore}
-                  </span>
-                )}
+              <TableCell align="right">{component.maxScore}
               </TableCell>
               <TableCell align="right">
                 <input
@@ -177,8 +86,8 @@ export default function CourseList() {
   );
 };
 
-
     const handleDelete = (id) => {
+      console.log(id);
       api.delete(`api/courses/${id}`).then(() => {
         setCourseList(courseList.filter((course) => course.id !== id));
       });
