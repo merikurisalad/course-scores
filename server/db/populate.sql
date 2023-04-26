@@ -6,7 +6,8 @@ DROP TABLE IF EXISTS Courses;
 CREATE TABLE Courses (
   idCourse INT AUTO_INCREMENT PRIMARY KEY,
   courseCode VARCHAR(255),
-  courseName VARCHAR(255)
+  courseName VARCHAR(255),
+  totalGrade FLOAT DEFAULT 0
 );
 
 -- Insert sample data into the courses table
@@ -22,7 +23,7 @@ CREATE TABLE Components (
   componentWeight INT,
   maxScore INT,
   courseID INT,
-  FOREIGN KEY (courseID) REFERENCES courses(idCourse)
+  FOREIGN KEY (courseID) REFERENCES courses(idCourse) ON DELETE CASCADE
 );
 
 -- Insert sample data into the components table with componentWeight values that amount to 100 for each courseID
