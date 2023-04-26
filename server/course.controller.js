@@ -2,7 +2,7 @@ import { db } from './db/index.js'
 
 export const getCourses = (req, res) => {
     const sqlSelect = `
-      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Components.idComponent AS componentId, Components.componentName, Components.componentWeight, Components.maxScore
+      SELECT Courses.idCourse, Courses.courseCode, Courses.courseName, Courses.totalGrade, Components.idComponent AS componentId, Components.componentName, Components.componentWeight, Components.maxScore
       FROM Courses
       LEFT JOIN Components ON Courses.idCourse = Components.courseId
     `;
@@ -19,6 +19,7 @@ export const getCourses = (req, res) => {
               id: courseId,
               courseCode: row.courseCode,
               courseName: row.courseName,
+              totalGrade: row.totalGrade,
               components: [],
             };
           }
@@ -72,5 +73,18 @@ export const deleteCourse = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('Error deleting course.');
+  }
+}
+
+export const updateCourse = async (req, res) => {
+  const sqlUpdateCourse = 'UPDATE Courses SET totalGrade = ? WHERE idCourse = ?';
+  try {
+    const id = req.params.id;
+    const { totalGrade } = req.body;
+    const result = await db.promise().query(sqlUpdateCourse, [totalGrade, id]);
+    res.status(200).send(`Course with ID ${id} updated.`);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error updating course.');
   }
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import './App.css';
-import AddCourseModal from "./Components/AddCourseModal"
-import CourseList from "./Components/CourseList"
+import AddCourseModal from "./Components/AddCourseModal";
+import CourseList from "./Components/CourseList";
+import CourseTable from "./Components/CourseTable";
 import Button from '@mui/material/Button';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -23,7 +24,8 @@ function App() {
         </Button>
         <AddCourseModal showModal={showModal} hideModal={hideModal} />
       </div>
-      <CourseList></CourseList>
+        <CourseList></CourseList>
+        <CourseTable></CourseTable>
     </div>
   )
 }

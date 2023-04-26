@@ -6,7 +6,8 @@ DROP TABLE IF EXISTS Courses;
 CREATE TABLE Courses (
   idCourse INT AUTO_INCREMENT PRIMARY KEY,
   courseCode VARCHAR(255),
-  courseName VARCHAR(255)
+  courseName VARCHAR(255),
+  totalGrade FLOAT DEFAULT 0
 );
 
 -- Insert sample data into the courses table

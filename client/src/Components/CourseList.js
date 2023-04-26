@@ -6,11 +6,13 @@ import {
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ConfirmDelete from './ConfirmDelete';
+import toast from 'react-hot-toast';
 
 
 export default function CourseList() {
     const [courseList, setCourseList] = useState([]);
     const [componentGrades, setComponentGrades] = useState({});
+
   
     useEffect(() => {
       api.get('/api/courses').then((response) => {
@@ -92,6 +94,15 @@ export default function CourseList() {
         setCourseList(courseList.filter((course) => course.id !== id));
       });
     };
+
+    const handleUpdate = (id) => {
+      console.log(id);
+      const { totalWeightedGrade } = computeWeightedGrade(courseList.find((course) => course.id === id).components, componentGrades);
+      const payload = { totalGrade: totalWeightedGrade };
+      api.put(`api/courses/${id}`, payload).then(() => {
+        toast.success("Successfully saved total grade.")
+      });
+    };
   
     return (
         <div style={{ width: '100%', margin: '0 auto', textAlign: 'left' }}>
@@ -115,7 +126,7 @@ export default function CourseList() {
             </AccordionDetails>
 
             <AccordionActions>
-              <Button variant="outlined">Update</Button>
+              <Button variant="outlined" onClick={() => handleUpdate(course.id)}>Update</Button>
               <ConfirmDelete onConfirm={() => handleDelete(course.id)}>
                 Delete Course
               </ConfirmDelete>
