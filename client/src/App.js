@@ -24,8 +24,10 @@ function App() {
         </Button>
         <AddCourseModal showModal={showModal} hideModal={hideModal} />
       </div>
+      <div className="content">
         <CourseList></CourseList>
         <CourseTable></CourseTable>
+      </div>
     </div>
   )
 }
