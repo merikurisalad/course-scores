@@ -22,6 +22,10 @@ export default function CourseTable() {
         return { courseCode, courseName, totalGrade };
     }
 
+    function determinePassFail(totalGrade) {
+      return (totalGrade >= 50) ? 'Pass' : 'Fail';
+    }
+
     const rows = courseList.map((course) => {
         return createData(course.courseCode, course.courseName, course.totalGrade);
     });
@@ -34,6 +38,7 @@ export default function CourseTable() {
                 <TableCell>Course Code</TableCell>
                 <TableCell>Course Name</TableCell>
                 <TableCell>Total Grade</TableCell>
+                <TableCell>Pass/Fail</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -44,6 +49,7 @@ export default function CourseTable() {
                   </TableCell>
                   <TableCell>{row.courseName}</TableCell>
                   <TableCell>{row.totalGrade}</TableCell>
+                  <TableCell>{determinePassFail(row.totalGrade)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
