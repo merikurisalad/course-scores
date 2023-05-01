@@ -47,14 +47,22 @@ const AddCourseModal = ({ showModal, hideModal }) => {
         </div>
           <div className="body">
             <p>
+            <form autoComplete='off'>
               <TextField
-                id="outlined-basic" label="Course Code" variant="outlined" onChange={(e)=> {
+                autoComplete='off'
+                id="outlined-basic"
+                label="Course Code"
+                variant="outlined"
+                onChange={(e)=> {
                   setCourseCode(e.target.value)
                 }}
               />
 
               <TextField
-                id="outlined-basic" label="Course Name" variant="outlined" onChange={(e)=> {
+                id="outlined-basic"
+                label="Course Name"
+                variant="outlined"
+                onChange={(e)=> {
                   setCourseName(e.target.value)
                 }}
               />
@@ -64,7 +72,10 @@ const AddCourseModal = ({ showModal, hideModal }) => {
               {components.map((component, index) => (
                 <div key={index}>
                   <TextField
-                    id="outlined-basic" label="Name (ex: Midterm)" variant="outlined" onChange={(e) => {
+                    id="outlined-basic"
+                    label="Name (ex: Midterm)"
+                    variant="outlined"
+                    onChange={(e) => {
                       const newComponents = [...components];
                       newComponents[index] = { ...component, name: e.target.value };
                       setComponents(newComponents);
@@ -72,7 +83,10 @@ const AddCourseModal = ({ showModal, hideModal }) => {
                   />
 
                   <TextField
-                    id="outlined-basic" label="Weight (ex: 30)" variant="outlined" onChange={(e) => {
+                    id="outlined-basic"
+                    label="Weight (ex: 30)"
+                    variant="outlined"
+                    onChange={(e) => {
                       const newComponents = [...components];
                       newComponents[index] = { ...component, weight: e.target.value };
                       setComponents(newComponents);
@@ -80,7 +94,10 @@ const AddCourseModal = ({ showModal, hideModal }) => {
                   />
 
                   <TextField
-                    id="outlined-basic" label="Max Score (ex: 50)" variant="outlined" onChange={(e) => {
+                    id="outlined-basic"
+                    label="Max Score (ex: 50)"
+                    variant="outlined"
+                    onChange={(e) => {
                       const newComponents = [...components];
                       newComponents[index] = { ...component, max: e.target.value };
                       setComponents(newComponents);
@@ -89,6 +106,7 @@ const AddCourseModal = ({ showModal, hideModal }) => {
                 </div>
               ))}
               </div>
+              </form>
               <Button variant="contained" onClick={() => {
                 const newComponents = [...components, { name: '', weight: 0, max: 0 }];
                 setComponents(newComponents);
@@ -121,4 +139,3 @@ const AddCourseModal = ({ showModal, hideModal }) => {
 };
 
 export default AddCourseModal;
-
