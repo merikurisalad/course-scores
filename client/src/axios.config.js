@@ -5,7 +5,7 @@ import axios from 'axios';
 // });
 
 const api = axios.create({
-  baseURL: `http://course-scores.herokuapp.com`,
+  baseURL: `https://course-scores.herokuapp.com`,
 });
 
 export default api;
