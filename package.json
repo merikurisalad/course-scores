@@ -7,7 +7,7 @@
   "scripts": {
     "server": "cd server && nodemon index.js",
     "client": "cd client && npm start",
-    "start": "node index.js",
+    "start": "cd server && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
