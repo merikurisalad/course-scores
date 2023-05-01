@@ -3,8 +3,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: "us-cdbr-east-06.cleardb.net",
+    user: "b817c218ada325",
+    password: "7f016a0e",
+    database: "heroku_afeaebc8ad8cfdc",
   });
