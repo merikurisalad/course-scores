@@ -1,7 +1,7 @@
 ## Course Scores App
 
 A web application used to calculate course grades, built with React, Node, Express, and MySQL.
-Check out the deployed web app at this link: 
+Check out the deployed web app at this link: https://course-scores.netlify.app/
 
 ![course-scores-add-course](https://user-images.githubusercontent.com/116539775/236922626-c3d20e0e-9a8c-4562-8852-96f4d5eb6908.gif)
 ![course-scores-app-update](https://user-images.githubusercontent.com/116539775/236922647-3490b11d-1681-4392-bc59-08a310155b06.gif)
