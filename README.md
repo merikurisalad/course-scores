@@ -8,7 +8,7 @@ A web application used to calculate course grades, built with React, Node, Expre
 
 ## Project Status
 
-Updated on April, 2025: This project was previously deployed on Netlify, with its database hosted on Heroku. However, since the free tier is no longer available on Heroku, I have taken the project offline. I don’t plan to redeploy it at this time, but you're welcome to check out the local version by cloning the repository and running it locally.
+Updated in April, 2025: This project was previously deployed on Netlify, with its database hosted on Heroku. However, since the free tier is no longer available on Heroku, I have taken the project offline. I don’t plan to redeploy it at this time, but you're welcome to check out the local version by cloning the repository and running it locally.
 
 ## Project Reflections
 
